@@ -4,8 +4,8 @@ import net.thetabx.jmcgui.McGlobalData;
 import net.thetabx.jmcgui.TCPReader;
 
 public class PUpdateHealth extends MPWPacket{
-
 	private final static short packetId = 0x08;
+    // Last update 74
 	
 	// Server to client
 	private float health;
@@ -14,24 +14,25 @@ public class PUpdateHealth extends MPWPacket{
 	
 	public PUpdateHealth(TCPReader in) throws Exception {
 		super(packetId);
-		this.health = in.readFloat();
-		this.food = in.readShort();
-		this.foodSaturation = in.readFloat();
+		health = in.readFloat();
+		food = in.readShort();
+		foodSaturation = in.readFloat();
+        // TODO gData.foodSaturation
 	}
 
 	public float getHealth()
 	{
-		return this.health;
+		return health;
 	}
 	
 	public short getFood()
 	{
-		return this.food;
+		return food;
 	}
 	
 	public float getFoodSaturation()
 	{
-		return this.foodSaturation;
+		return foodSaturation;
 	}
 	
 	public void gDataMod(McGlobalData gData)

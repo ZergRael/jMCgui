@@ -3,8 +3,8 @@ package net.thetabx.jmcgui.MPWPackets;
 import net.thetabx.jmcgui.TCPWriter;
 
 public class PPlayerLook extends MPWPacket{
-
 	private final static short packetId = 0x0C;
+    // Last update 74
 	
 	// Client to server
 	private float yaw;

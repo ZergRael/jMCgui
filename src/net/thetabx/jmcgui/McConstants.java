@@ -11,5 +11,5 @@ public class McConstants {
 	public final static int DEFAULTPORT = 25565;
 	public final static int DEFAULTFPS = 25;
 	public final static int DEFAULTZOOM = 6;
-	
+
 }

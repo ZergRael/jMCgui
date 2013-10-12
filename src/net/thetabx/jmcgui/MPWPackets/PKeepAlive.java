@@ -5,15 +5,15 @@ import net.thetabx.jmcgui.TCPReader;
 import net.thetabx.jmcgui.TCPWriter;
 
 public class PKeepAlive extends MPWPacket{
-
 	private final static short packetId = 0x00;
+    // Last update 74
 	
 	// Two way
 	private int keepAliveId;
 	
 	public PKeepAlive(TCPReader in) throws Exception {
 		super(packetId);
-		this.keepAliveId = in.readInt();
+		keepAliveId = in.readInt();
 	}
 	
 	public PKeepAlive(int keepAliveId)

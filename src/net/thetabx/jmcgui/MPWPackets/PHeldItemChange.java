@@ -4,8 +4,8 @@ import net.thetabx.jmcgui.TCPReader;
 import net.thetabx.jmcgui.TCPWriter;
 
 public class PHeldItemChange extends MPWPacket{
-
 	private final static short packetId = 0x10;
+    // Last update 74
 
     // Two way
 	private short slotId;

@@ -4,8 +4,8 @@ import net.thetabx.jmcgui.McGlobalData;
 import net.thetabx.jmcgui.TCPReader;
 
 public class PTimeUpdate extends MPWPacket{
-
 	private final static short packetId = 0x04;
+    // Last update 74
 	
 	// Server to client
     private long ageOfTheWorld;

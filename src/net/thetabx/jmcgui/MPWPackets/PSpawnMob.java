@@ -3,12 +3,13 @@ package net.thetabx.jmcgui.MPWPackets;
 import java.util.ArrayList;
 
 import net.thetabx.jmcgui.MPWEntities.EMob;
+import net.thetabx.jmcgui.MPWObjects.Metadata;
 import net.thetabx.jmcgui.McGlobalData;
 import net.thetabx.jmcgui.TCPReader;
 
 public class PSpawnMob extends MPWPacket{
-
 	private final static short packetId = 0x18;
+    // Last update 74
 	
 	// Server to client
 	private int eId;
@@ -16,25 +17,28 @@ public class PSpawnMob extends MPWPacket{
 	private int x;
 	private int y;
 	private int z;
+    private byte ptich;
+    private byte headPtich;
 	private byte yaw;
-	private byte ptich;
-	private byte headYaw;
-	private ArrayList<McMetadata> metadata;
+    private short velocityX;
+    private short velocityY;
+    private short velocityZ;
+	private ArrayList<Metadata> metadata;
 	
 	public PSpawnMob(TCPReader in) throws Exception {
 		super(packetId);
-		this.eId = in.readInt();
-		this.type = in.readByte();
-		this.x = in.readInt();
-		this.y = in.readInt();
-		this.z = in.readInt();
-		this.yaw = in.readByte();
-		this.ptich = in.readByte();
-		this.headYaw = in.readByte();
-		this.metadata = in.readMetadata();
-		
-		if(this.getY() > 255)
-			throw new Exception("FU int Y:" + this.y + " doubleY:" + this.getY());
+		eId = in.readInt();
+		type = in.readByte();
+		x = in.readInt();
+		y = in.readInt();
+		z = in.readInt();
+        ptich = in.readByte();
+        headPtich = in.readByte();
+		yaw = in.readByte();
+        velocityX = in.readShort();
+        velocityY = in.readShort();
+        velocityZ = in.readShort();
+		metadata = in.readMetadata();
 	}
 
 	public int geteId() {
@@ -56,20 +60,32 @@ public class PSpawnMob extends MPWPacket{
 	public double getZ() {
 		return (double)z/32;
 	}
+
+    public byte getPtich() {
+        return ptich;
+    }
+
+    public byte getHeadPtich() {
+        return headPtich;
+    }
 	
 	public byte getYaw() {
 		return yaw;
 	}
-	
-	public byte getPtich() {
-		return ptich;
-	}
 
-	public byte getHeadYaw() {
-		return headYaw;
-	}
+    public short getVelocityX() {
+        return velocityX;
+    }
 
-	public ArrayList<McMetadata> getMetadata() {
+    public short getVelocityY() {
+        return velocityY;
+    }
+
+    public short getVelocityZ() {
+        return velocityZ;
+    }
+
+    public ArrayList<Metadata> getMetadata() {
 		return metadata;
 	}
 	

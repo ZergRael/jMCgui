@@ -3,8 +3,8 @@ package net.thetabx.jmcgui.MPWPackets;
 import net.thetabx.jmcgui.TCPReader;
 
 public class PSpawnPosition extends MPWPacket{
-
 	private final static short packetId = 0x06;
+    // Last update 74
 	
 	// Server to client
 	private int x;
@@ -13,9 +13,9 @@ public class PSpawnPosition extends MPWPacket{
 	
 	public PSpawnPosition(TCPReader in) throws Exception {
 		super(packetId);
-		this.x = in.readInt();
-		this.y = in.readInt();
-		this.z = in.readInt();
+		x = in.readInt();
+		y = in.readInt();
+		z = in.readInt();
 	}
 
 	public int getX() {

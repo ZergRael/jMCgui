@@ -3,8 +3,8 @@ package net.thetabx.jmcgui.MPWPackets;
 import net.thetabx.jmcgui.TCPReader;
 
 public class PUseBed extends MPWPacket{
-
 	private final static short packetId = 0x11;
+    // Last update 74
 	
 	// Server to client
 	private int eId;
@@ -14,11 +14,11 @@ public class PUseBed extends MPWPacket{
 	
 	public PUseBed(TCPReader in) throws Exception {
 		super(packetId);
-		this.eId = in.readInt();
+		eId = in.readInt();
 		in.readByte();
-		this.x = in.readInt();
-		this.y = in.readByte();
-		this.z = in.readInt();
+		x = in.readInt();
+		y = in.readByte();
+		z = in.readInt();
 	}
 
 	public int geteId() {

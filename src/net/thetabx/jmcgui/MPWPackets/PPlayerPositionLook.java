@@ -6,8 +6,8 @@ import net.thetabx.jmcgui.TCPReader;
 import net.thetabx.jmcgui.TCPWriter;
 
 public class PPlayerPositionLook extends MPWPacket{
-
 	private final static short packetId = 0x0D;
+    // Last update 74
 	
 	// Two way
 	private double x;
@@ -20,13 +20,13 @@ public class PPlayerPositionLook extends MPWPacket{
 	
 	public PPlayerPositionLook(TCPReader in) throws Exception {
 		super(packetId);
-		this.x = in.readDouble();
-		this.stance = in.readDouble();
-		this.y = in.readDouble();
-		this.z = in.readDouble();
-		this.yaw = in.readFloat();
-		this.pitch = in.readFloat();
-		this.onGround = in.readBool();
+		x = in.readDouble();
+		stance = in.readDouble();
+		y = in.readDouble();
+		z = in.readDouble();
+		yaw = in.readFloat();
+		pitch = in.readFloat();
+		onGround = in.readBool();
 	}
 	
 	public PPlayerPositionLook(double x, double y, double stance, double z, float yaw, float pitch, boolean onGround)

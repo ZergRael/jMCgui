@@ -7,8 +7,8 @@ import net.thetabx.jmcgui.TCPWriter;
 import net.thetabx.jmcgui.Utils.HTTPRequest;
 
 public class PHandshake extends MPWPacket{
-
 	private final static short packetId = 0x02;
+    // Last update 74
 
 	// Client to server
 	private String username;

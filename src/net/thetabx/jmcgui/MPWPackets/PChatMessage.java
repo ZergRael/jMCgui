@@ -5,16 +5,17 @@ import net.thetabx.jmcgui.TCPReader;
 import net.thetabx.jmcgui.TCPWriter;
 
 public class PChatMessage extends MPWPacket{
-
 	private final static short packetId = 0x03;
+    // Last update 74
 	
 	// Two way
 	private String message;
 	
 	public PChatMessage(TCPReader in) throws Exception {
 		super(packetId);
-		this.message = in.readString();
-		System.out.println("Chat message : " + this.message);
+		message = in.readString();
+		System.out.println("Chat message : " + message);
+        // TODO Process JSON
 	}
 	
 	public PChatMessage(String message)
@@ -36,10 +37,9 @@ public class PChatMessage extends MPWPacket{
 	
 	public void gDataMod(McGlobalData gData)
 	{
-		synchronized(gData)
+		synchronized(gData.receivedChatMessages)
 		{
 			gData.addReceivedMessage(message);
 		}
-		//System.out.println(message);
 	}
 }

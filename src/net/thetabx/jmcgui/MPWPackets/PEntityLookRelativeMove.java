@@ -5,7 +5,6 @@ import net.thetabx.jmcgui.McGlobalData;
 import net.thetabx.jmcgui.TCPReader;
 
 public class PEntityLookRelativeMove extends MPWPacket{
-
 	private final static short packetId = 0x21;
 	
 	// Server to client
@@ -18,12 +17,12 @@ public class PEntityLookRelativeMove extends MPWPacket{
 	
 	public PEntityLookRelativeMove(TCPReader in) throws Exception {
 		super(packetId);
-		this.eId = in.readInt();
-		this.dX = in.readByte();
-		this.dY = in.readByte();
-		this.dZ = in.readByte();
-		this.yaw = in.readByte();
-		this.pitch = in.readByte();
+		eId = in.readInt();
+		dX = in.readByte();
+		dY = in.readByte();
+		dZ = in.readByte();
+		yaw = in.readByte();
+		pitch = in.readByte();
 	}
 
 	public double getdX() {

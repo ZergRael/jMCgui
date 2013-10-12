@@ -5,8 +5,8 @@ import net.thetabx.jmcgui.McGlobalData;
 import net.thetabx.jmcgui.TCPReader;
 
 public class PEntityTeleport extends MPWPacket{
-
 	private final static short packetId = 0x22;
+    // Last update 74
 	
 	// Server to client
 	private int eId;
@@ -18,12 +18,12 @@ public class PEntityTeleport extends MPWPacket{
 	
 	public PEntityTeleport(TCPReader in) throws Exception {
 		super(packetId);
-		this.eId = in.readInt();
-		this.x = in.readInt();
-		this.y = in.readInt();
-		this.z = in.readInt();
-		this.yaw = in.readByte();
-		this.ptich = in.readByte();
+		eId = in.readInt();
+		x = in.readInt();
+		y = in.readInt();
+		z = in.readInt();
+		yaw = in.readByte();
+		ptich = in.readByte();
 	}
 
 	public int geteId() {

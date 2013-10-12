@@ -3,8 +3,8 @@ package net.thetabx.jmcgui.MPWPackets;
 import net.thetabx.jmcgui.TCPReader;
 
 public class PSpawnExperienceOrb extends MPWPacket{
-
 	private final static short packetId = 0x1A;
+    // Last update 74
 	
 	// Server to client
 	private int eId;
@@ -15,11 +15,11 @@ public class PSpawnExperienceOrb extends MPWPacket{
 	
 	public PSpawnExperienceOrb(TCPReader in) throws Exception {
 		super(packetId);
-		this.eId = in.readInt();
-		this.x = in.readInt();
-		this.y = in.readInt();
-		this.z = in.readInt();
-		this.count = in.readShort();
+		eId = in.readInt();
+		x = in.readInt();
+		y = in.readInt();
+		z = in.readInt();
+		count = in.readShort();
 	}
 
 	public int geteId() {

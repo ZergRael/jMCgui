@@ -5,8 +5,8 @@ import net.thetabx.jmcgui.McGlobalData;
 import net.thetabx.jmcgui.TCPReader;
 
 public class PEntityRelativeMove extends MPWPacket{
-
 	private final static short packetId = 0x1F;
+    // Last update 74
 	
 	// Server to client
 	private int eId;
@@ -16,10 +16,10 @@ public class PEntityRelativeMove extends MPWPacket{
 	
 	public PEntityRelativeMove(TCPReader in) throws Exception {
 		super(packetId);
-		this.eId = in.readInt();
-		this.dX = in.readByte();
-		this.dY = in.readByte();
-		this.dZ = in.readByte();
+		eId = in.readInt();
+		dX = in.readByte();
+		dY = in.readByte();
+		dZ = in.readByte();
 	}
 
 	public double getdX() {
@@ -44,7 +44,7 @@ public class PEntityRelativeMove extends MPWPacket{
 		{
 			MPWEntity e = gData.getEntity(this.geteId());
 			if(e != null)
-				e.setXYZ(e.getX() + this.getdX(), e.getY() + this.getdY(), e.getZ() + this.getdZ());
+				e.setXYZ(e.getX() + getdX(), e.getY() + getdY(), e.getZ() + getdZ());
 		}
 	}
 }

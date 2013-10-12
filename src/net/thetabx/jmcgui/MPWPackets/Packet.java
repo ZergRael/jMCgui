@@ -45,7 +45,7 @@ public enum Packet {
 	SetExperience(0x2B, PSetExperience.class),
     EntityProperties(0x2C, PEntityProperties.class),
 	MapColumnAllocation(0x32, PMapColumnAllocation.class),
-	MapChunks(0x33, PMapChunks.class),
+	ChunkData(0x33, PChunkData.class),
 	MultiBlockChange(0x34, PMultiBlockChange.class),
 	BlockChange(0x35, PBlockChange.class),
 	BlockAction(0x36, PBlockAction.class),

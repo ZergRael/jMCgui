@@ -502,11 +502,13 @@ public class MainFrame extends JFrame {
 				lblPos.setText(self != null ? "X:" + self.getX() + " Y:" + self.getY() + " Z:" + self.getZ() : "Position");
 				
 				// Chatmessage receive
-				String[] messageR = gData.getReceivedMessages();
-				if(messageR != null) {
-					for(int i = 0; i < messageR.length; i++)
-						addTextToChatbox(messageR[i]);
-				}
+                while(gData.hasReceivedMessagesWaiting())
+                {
+                    synchronized (gData.receivedChatMessages)
+                    {
+                        addTextToChatbox(gData.getNextAwaitingMessage());
+                    }
+                }
 				
 				// Sleep
 				try {

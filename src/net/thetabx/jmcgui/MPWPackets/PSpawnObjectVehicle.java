@@ -3,8 +3,8 @@ package net.thetabx.jmcgui.MPWPackets;
 import net.thetabx.jmcgui.TCPReader;
 
 public class PSpawnObjectVehicle extends MPWPacket{
-
 	private final static short packetId = 0x17;
+    // Last update 74
 	
 	// Server to client
 	private int eId;
@@ -18,7 +18,7 @@ public class PSpawnObjectVehicle extends MPWPacket{
     private short speedX;
     private short speedY;
     private short speedZ;
-	
+
 	public PSpawnObjectVehicle(TCPReader in) throws Exception {
 		super(packetId);
 		this.eId = in.readInt();
@@ -68,7 +68,6 @@ public class PSpawnObjectVehicle extends MPWPacket{
 	public int getZ() {
 		return z;
 	}
-
 
     public byte getPitch() {
         return pitch;

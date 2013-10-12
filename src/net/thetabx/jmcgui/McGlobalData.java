@@ -24,8 +24,8 @@ public class McGlobalData {
 	private short level;
 	private float experience;
 	private Hashtable<Integer, MPWEntity> entities = new Hashtable<Integer, MPWEntity>();
-	private ArrayList<String> receivedChatMessages = new ArrayList<String>();
-	private ArrayList<String> toSendChatMessages = new ArrayList<String>();
+	public final ArrayList<String> receivedChatMessages = new ArrayList<String>();
+	public final ArrayList<String> toSendChatMessages = new ArrayList<String>();
 	private Hashtable<MapCoord, MapData> mapData = new Hashtable<MapCoord, MapData>();
 	
 	public enum StopReason {
@@ -131,17 +131,17 @@ public class McGlobalData {
 		return this.timeTicks;
 	}
 	// Chat messages
+    public boolean hasReceivedMessagesWaiting()
+    {
+        return !receivedChatMessages.isEmpty();
+    }
 	public void addReceivedMessage(String str)
 	{
 		receivedChatMessages.add(str);
 	}
-	public String[] getReceivedMessages()
+	public String getNextAwaitingMessage()
 	{
-		if(receivedChatMessages.isEmpty())
-			return null;
-		String[] messages = receivedChatMessages.toArray(new String[receivedChatMessages.size()]);
-		receivedChatMessages.clear();
-		return messages;
+		return (receivedChatMessages.isEmpty() ? null : receivedChatMessages.remove(0));
 	}
 	public void addToSendMessage(String message) {
 		toSendChatMessages.add(message);

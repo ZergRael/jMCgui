@@ -3,8 +3,8 @@ package net.thetabx.jmcgui.MPWPackets;
 import net.thetabx.jmcgui.TCPReader;
 
 public class PCollectItem extends MPWPacket{
-
 	private final static short packetId = 0x16;
+    // Last update 74
 	
 	// Server to client
 	private int collectedEId;
@@ -12,8 +12,8 @@ public class PCollectItem extends MPWPacket{
 	
 	public PCollectItem(TCPReader in) throws Exception {
 		super(packetId);
-		this.collectedEId = in.readInt();
-		this.collectorEId = in.readInt();
+		collectedEId = in.readInt();
+		collectorEId = in.readInt();
 	}
 
 	public int getCollectedEId() {

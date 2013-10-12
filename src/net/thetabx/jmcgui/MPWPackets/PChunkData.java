@@ -8,11 +8,11 @@ import net.thetabx.jmcgui.DataTypes.MapData;
 import net.thetabx.jmcgui.McGlobalData;
 import net.thetabx.jmcgui.TCPReader;
 
-public class PMapChunks extends MPWPacket{
-
+public class PChunkData extends MPWPacket{
 	private final static short packetId = 0x33;
+    // Last update 74
 	
-	// Two way
+	// Server to client
 	private int x;
 	private int z;
 	private Boolean groundUpContinuous;
@@ -21,18 +21,16 @@ public class PMapChunks extends MPWPacket{
 	private int compressedSize;
 	private byte[] compressedData; // UByte array
 	
-	public PMapChunks(TCPReader in) throws Exception {
+	public PChunkData(TCPReader in) throws Exception {
 		super(packetId);
-		this.x = in.readInt();
-		this.z = in.readInt();
-		this.groundUpContinuous = in.readBool();
-		this.primaryBitMap = in.readUShort();
-		this.addBitMap = in.readUShort();
-		this.compressedSize = in.readInt();
-		in.readInt();
-		compressedData = new byte[this.compressedSize];
-		for(int i = 0; i < this.compressedSize; i++)
-			compressedData[i] = in.readByte();	
+		x = in.readInt();
+		z = in.readInt();
+		groundUpContinuous = in.readBool();
+		primaryBitMap = in.readUShort();
+		addBitMap = in.readUShort();
+		compressedSize = in.readInt();
+		compressedData = in.readByteArray(compressedSize);
+        // TODO Check Byte/UByte array
 	}
 
 	public int getAddBitMap() {

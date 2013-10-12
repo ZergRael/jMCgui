@@ -4,8 +4,8 @@ import net.thetabx.jmcgui.TCPReader;
 import net.thetabx.jmcgui.TCPWriter;
 
 public class PAnimation extends MPWPacket{
-
 	private final static short packetId = 0x12;
+    // Last update 74
 	
 	// 2 Way
 	private int eId;
@@ -15,8 +15,8 @@ public class PAnimation extends MPWPacket{
 	
 	public PAnimation(TCPReader in) throws Exception {
 		super(packetId);
-		this.eId = in.readInt();
-		this.animation = in.readByte();
+		eId = in.readInt();
+		animation = in.readByte();
 	}
 	
 	public PAnimation(int eId, byte animation)

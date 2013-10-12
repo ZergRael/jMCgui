@@ -3,8 +3,8 @@ package net.thetabx.jmcgui.MPWPackets;
 import net.thetabx.jmcgui.TCPReader;
 
 public class PSpawnPainting extends MPWPacket{
-
 	private final static short packetId = 0x19;
+    // Last update 74
 	
 	// Server to client
 	private int eId;
@@ -16,12 +16,12 @@ public class PSpawnPainting extends MPWPacket{
 	
 	public PSpawnPainting(TCPReader in) throws Exception {
 		super(packetId);
-		this.eId = in.readInt();
-		this.title = in.readString();
-		this.x = in.readInt();
-		this.y = in.readInt();
-		this.z = in.readInt();
-		this.direction = in.readInt();
+		eId = in.readInt();
+		title = in.readString();
+		x = in.readInt();
+		y = in.readInt();
+		z = in.readInt();
+		direction = in.readInt();
 	}
 
 	public int getDirection() {

@@ -1,38 +1,33 @@
 package net.thetabx.jmcgui.MPWPackets;
 
+import net.thetabx.jmcgui.MPWObjects.SlotData;
 import net.thetabx.jmcgui.TCPReader;
 
 public class PEntityEquipment extends MPWPacket{
-
 	private final static short packetId = 0x05;
+    // Last update 74
 	
 	// Server to client
 	private int eId;
 	private short slot;
-	private short itemId;
-	private short damage;
+    private SlotData slotData;
 	
 	public PEntityEquipment(TCPReader in) throws Exception {
 		super(packetId);
-		this.eId = in.readInt();
-		this.slot = in.readShort();
-		this.itemId = in.readShort();
-		this.damage = in.readShort();
-	}
-
-	public short getDamage() {
-		return damage;
+		eId = in.readInt();
+		slot = in.readShort();
+        slotData = new SlotData(in);
 	}
 
 	public int geteId() {
 		return eId;
 	}
 
-	public short getItemId() {
-		return itemId;
-	}
-
 	public short getSlot() {
 		return slot;
 	}
+
+    public SlotData getSlotData() {
+        return slotData;
+    }
 }

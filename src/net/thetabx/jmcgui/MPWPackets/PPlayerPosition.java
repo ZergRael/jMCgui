@@ -3,8 +3,8 @@ package net.thetabx.jmcgui.MPWPackets;
 import net.thetabx.jmcgui.TCPWriter;
 
 public class PPlayerPosition extends MPWPacket{
-
 	private final static short packetId = 0x0B;
+    // Last update 74
 	
 	// Client to server
 	private double x;

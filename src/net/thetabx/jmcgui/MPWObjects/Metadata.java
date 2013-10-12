@@ -1,20 +1,20 @@
-package net.thetabx.jmcgui.MPWPackets;
+package net.thetabx.jmcgui.MPWObjects;
 
-public class McMetadata {
+public class Metadata {
 
 	private short index;
 	private short type;
 	private Object value;
 	private Object[] values;
 	
-	public McMetadata(short index, short type, Object value)
+	public Metadata(short index, short type, Object value)
 	{
 		this.setIndex(index);
 		this.setType(type);
 		this.setValue(value);
 	}
 	
-	public McMetadata(short index, short type, Object[] values)
+	public Metadata(short index, short type, Object[] values)
 	{
 		this.setIndex(index);
 		this.setType(type);
@@ -45,16 +45,10 @@ public class McMetadata {
 		this.values = values;
 	}
 
-	/**
-	 * @return the index
-	 */
 	public short getIndex() {
 		return index;
 	}
 
-	/**
-	 * @param index the index to set
-	 */
 	public void setIndex(short index) {
 		this.index = index;
 	}

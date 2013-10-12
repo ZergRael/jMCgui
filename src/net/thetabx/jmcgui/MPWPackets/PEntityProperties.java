@@ -10,6 +10,7 @@ import net.thetabx.jmcgui.TCPReader;
  */
 public class PEntityProperties extends MPWPacket {
     public static final short packetId = 0x2C;
+    // Last update 74
 
     // Server to client
     private int entityId;

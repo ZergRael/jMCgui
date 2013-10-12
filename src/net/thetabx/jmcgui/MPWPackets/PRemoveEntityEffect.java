@@ -3,8 +3,8 @@ package net.thetabx.jmcgui.MPWPackets;
 import net.thetabx.jmcgui.TCPReader;
 
 public class PRemoveEntityEffect extends MPWPacket{
-
 	private final static short packetId = 0x2A;
+    // Last update 74
 	
 	// Server to client
 	private int eId;
@@ -12,8 +12,8 @@ public class PRemoveEntityEffect extends MPWPacket{
 	
 	public PRemoveEntityEffect(TCPReader in) throws Exception {
 		super(packetId);
-		this.eId = in.readInt();
-		this.effectId = in.readByte();
+		eId = in.readInt();
+		effectId = in.readByte();
 	}
 	
 	public int geteId() {

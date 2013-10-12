@@ -3,8 +3,8 @@ package net.thetabx.jmcgui.MPWPackets;
 import net.thetabx.jmcgui.TCPReader;
 
 public class PEntityHeadLook extends MPWPacket{
-
 	private final static short packetId = 0x23;
+    // Last update 74
 	
 	// Server to client
 	private int eId;
@@ -12,8 +12,8 @@ public class PEntityHeadLook extends MPWPacket{
 	
 	public PEntityHeadLook(TCPReader in) throws Exception {
 		super(packetId);
-		this.eId = in.readInt();
-		this.headYaw = in.readByte();
+		eId = in.readInt();
+		headYaw = in.readByte();
 	}
 
 	public int geteId() {

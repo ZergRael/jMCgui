@@ -5,8 +5,8 @@ import net.thetabx.jmcgui.McGlobalData;
 import net.thetabx.jmcgui.TCPReader;
 
 public class PMultiBlockChange extends MPWPacket{
-
 	private final static short packetId = 0x34;
+    // Last update 74
 	
 	// Server to client
 	private int chunkX;
@@ -17,12 +17,12 @@ public class PMultiBlockChange extends MPWPacket{
 	
 	public PMultiBlockChange(TCPReader in) throws Exception {
 		super(packetId);
-		this.chunkX = in.readInt();
-		this.chunkZ = in.readInt();
-		this.recordCount = in.readShort();
-		this.dataSize = in.readInt();
+		chunkX = in.readInt();
+		chunkZ = in.readInt();
+		recordCount = in.readShort();
+		dataSize = in.readInt();
 		
-		this.data = new int[recordCount];
+		data = new int[recordCount];
 		for(int i = 0; i < recordCount; i++)
 			data[i] = in.readInt();
 	}

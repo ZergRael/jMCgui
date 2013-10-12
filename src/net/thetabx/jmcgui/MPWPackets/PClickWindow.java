@@ -1,5 +1,6 @@
 package net.thetabx.jmcgui.MPWPackets;
 
+import net.thetabx.jmcgui.MPWObjects.SlotData;
 import net.thetabx.jmcgui.TCPWriter;
 
 public class PClickWindow extends MPWPacket{

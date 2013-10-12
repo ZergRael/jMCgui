@@ -5,8 +5,8 @@ import net.thetabx.jmcgui.TCPReader;
 import net.thetabx.jmcgui.TCPWriter;
 
 public class PLoginRequest extends MPWPacket{
-
 	private final static short packetId = 0x01;
+    // Last update 74
 
 	// Server to client
 	private int entityId;
@@ -18,18 +18,18 @@ public class PLoginRequest extends MPWPacket{
 	
 	public PLoginRequest(TCPReader in) throws Exception {
 		super(packetId);
-		this.entityId = in.readInt();
-		this.levelType = in.readString();
-		this.gameMode = in.readByte();
-		this.dimension = in.readByte();
-		this.difficulty = in.readByte();
+		entityId = in.readInt();
+		levelType = in.readString();
+		gameMode = in.readByte();
+		dimension = in.readByte();
+		difficulty = in.readByte();
 		in.readByte();
-		this.maxPlayers = in.readUByte();
+		maxPlayers = in.readUByte();
 	}
 	
 	public void gDataMod(McGlobalData gData)
 	{
-		gData.setPlayerEntityId(this.entityId);
+		gData.setPlayerEntityId(entityId);
 	}
 
 	public byte getDifficulty() {

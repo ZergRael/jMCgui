@@ -1,6 +1,7 @@
 package net.thetabx.jmcgui;
 
-import net.thetabx.jmcgui.MPWPackets.McMetadata;
+import net.thetabx.jmcgui.MPWObjects.Metadata;
+import net.thetabx.jmcgui.MPWObjects.SlotData;
 
 import java.io.*;
 import java.nio.ByteBuffer;
@@ -128,10 +129,30 @@ public class TCPReader {
 		while(in.read(c, 0, 1) != 1) ;
 		return c[0] == 1;
 	}
+
+    public SlotData readSlotData() throws Exception
+    {
+        short itemBlockId = this.readShort();
+        if(itemBlockId != -1)
+        {
+            byte itemCount = this.readByte();
+            short itemDamage = this.readShort();
+            short nbtDataLength = this.readShort();
+            if(nbtDataLength != -1)
+            {
+                byte[] nbtData = this.readByteArray(nbtDataLength);
+                return new SlotData(itemBlockId, itemCount, itemDamage, nbtDataLength, nbtData);
+            }
+            else
+                return new SlotData(itemBlockId, itemCount, itemDamage);
+        }
+        else
+            return new SlotData();
+    }
 	
-	public ArrayList<McMetadata> readMetadata() throws Exception
+	public ArrayList<Metadata> readMetadata() throws Exception
 	{
-		ArrayList<McMetadata> metadataList = new ArrayList<McMetadata>();
+		ArrayList<Metadata> metadataList = new ArrayList<Metadata>();
 		
 		short x = this.readUByte();
 		while(x != 127)
@@ -174,12 +195,12 @@ public class TCPReader {
 				values[2] = this.readInt();
 			}
 			
-			McMetadata mData = null;
+			Metadata mData = null;
 			
 			if(value != null)
-				mData = new McMetadata(index, type, value);
+				mData = new Metadata(index, type, value);
 			else if(values != null)
-				mData = new McMetadata(index, type, values);
+				mData = new Metadata(index, type, values);
 			
 			if(mData != null)
 				metadataList.add(mData);

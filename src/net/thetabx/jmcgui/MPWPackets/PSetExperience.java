@@ -4,8 +4,8 @@ import net.thetabx.jmcgui.McGlobalData;
 import net.thetabx.jmcgui.TCPReader;
 
 public class PSetExperience extends MPWPacket{
-
 	private final static short packetId = 0x2B;
+    // Last update 74
 	
 	// Server to client
 	private float experienceBar;
@@ -14,9 +14,9 @@ public class PSetExperience extends MPWPacket{
 	
 	public PSetExperience(TCPReader in) throws Exception {
 		super(packetId);
-		this.experienceBar = in.readFloat();
-		this.level = in.readShort();
-		this.totalExperience = in.readShort();
+		experienceBar = in.readFloat();
+		level = in.readShort();
+		totalExperience = in.readShort();
 	}
 	
 	public float getExperienceBar()
