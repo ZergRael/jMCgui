@@ -11,9 +11,8 @@ public class PUpdateTileEntity extends MPWPacket{
 	private short y;
 	private int z;
 	private byte action;
-	private int custom1;
-	private int custom2;
-	private int custom3;
+    private short dataLength;
+    private byte[] nbtData;
 	
 	public PUpdateTileEntity(TCPReader in) throws Exception {
 		super(packetId);
@@ -21,9 +20,9 @@ public class PUpdateTileEntity extends MPWPacket{
 		this.y = in.readShort();
 		this.z = in.readInt();
 		this.action = in.readByte();
-		this.custom1 = in.readInt();
-		this.custom2 = in.readInt();
-		this.custom3 = in.readInt();
+        dataLength = in.readShort();
+        if(dataLength > 0)
+            nbtData = in.readByteArray(dataLength);
 	}
 
 	public int getX() {
@@ -42,15 +41,11 @@ public class PUpdateTileEntity extends MPWPacket{
 		return action;
 	}
 
-	public int getCustom1() {
-		return custom1;
-	}
+    public short getDataLength() {
+        return dataLength;
+    }
 
-	public int getCustom2() {
-		return custom2;
-	}
-
-	public int getCustom3() {
-		return custom3;
-	}
+    public byte[] getNbtData() {
+        return nbtData;
+    }
 }

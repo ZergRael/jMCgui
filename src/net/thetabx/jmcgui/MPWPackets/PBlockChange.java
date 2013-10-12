@@ -12,7 +12,7 @@ public class PBlockChange extends MPWPacket{
 	private int x;
 	private byte y;
 	private int z;
-	private byte blockType;
+	private short blockType;
 	private byte blockMetadata;
 	
 	public PBlockChange(TCPReader in) throws Exception {
@@ -20,7 +20,7 @@ public class PBlockChange extends MPWPacket{
 		this.x = in.readInt();
 		this.y = in.readByte();
 		this.z = in.readInt();
-		this.blockType = in.readByte();
+		this.blockType = in.readShort();
 		this.blockMetadata = in.readByte();
 	}
 
@@ -36,7 +36,7 @@ public class PBlockChange extends MPWPacket{
 		return z;
 	}
 
-	public byte getBlockType() {
+	public short getBlockType() {
 		return blockType;
 	}
 
@@ -47,6 +47,8 @@ public class PBlockChange extends MPWPacket{
 	public void gDataMod(McGlobalData gData) {
 		MapCoord coord = new MapCoord(x / 16, z / 16);
 		MapData map = gData.getMapData(coord);
+        if(map == null)
+            return;
 		byte[][][] data = map.getData();
 		if(data == null) {
 			System.out.println("Can't modify uncreated data map");
@@ -55,7 +57,7 @@ public class PBlockChange extends MPWPacket{
 		byte xChunkRel = (byte) Math.abs(x % 16);
 		byte zChunkRel = (byte) Math.abs(z % 16);
 		System.out.println("X=" + (coord.getTrueX() + xChunkRel) + " Z=" + (coord.getTrueZ() + zChunkRel) + " x=" + xChunkRel +" y=" + y + " z=" + zChunkRel + " was_id=" + data[xChunkRel][zChunkRel][y] + " now_id=" + blockType);
-		data[xChunkRel][zChunkRel][y] = blockType;
+		//data[xChunkRel][zChunkRel][y] = blockType;
 		int lastY = (map.getLastY() > y / 16 ? map.getLastY() : y/16);
 		map.setData(data);
 		map.setLastY(lastY);

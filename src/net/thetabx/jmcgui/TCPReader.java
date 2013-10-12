@@ -7,11 +7,9 @@ import java.nio.ByteBuffer;
 import java.util.ArrayList;
 
 public class TCPReader {
-	
-	//private BufferedReader in = null;
+
 	private BufferedInputStream in = null;
-	
-	//public TCPReader(BufferedReader in)
+
 	public TCPReader(BufferedInputStream in)
 	{
 		if(in != null)
@@ -21,99 +19,78 @@ public class TCPReader {
 	public byte readByte() throws Exception
 	{
 		byte c[] = new byte[1];
-		if(in.read(c, 0, 1) == 1)
-			return c[0];
-		else
-			throw new Exception("Byte : buffer is empty");
+        while(in.read(c, 0, 1) != 1) ;
+        return c[0];
 	}
 
     public byte[] readByteArray(int len) throws Exception
     {
         byte c[] = new byte[len];
-        if(in.read(c, 0, len) == len)
-            return c;
-        else
-            throw new Exception("ByteArray : buffer is empty");
+        int read = 0;
+        while(read != len)
+            read += in.read(c, read, len - read);
+        return c;
     }
 	
 	public short readUByte() throws Exception
 	{
 		byte c[] = new byte[1];
-		if(in.read(c, 0, 1) == 1)
-			return (short) (c[0] & 0xFF);
-		else
-			throw new Exception("UByte : buffer is empty");
+		while(in.read(c, 0, 1) != 1) ;
+		return (short) (c[0] & 0xFF);
 	}
 	
 	public short readShort() throws Exception
 	{
 		byte c[] = new byte[2];
-		if(in.read(c, 0, 2) == 2)
-			return ByteBuffer.wrap(c).getShort();
-			//return (short) (c[0] << 8 | c[1]);
-		else
-			throw new Exception("Short : buffer is empty");
+        byte read = 0;
+        while(read != 2)
+            read += in.read(c, read, 2 - read);
+		return ByteBuffer.wrap(c).getShort();
 	}
 	
 	public int readUShort() throws Exception
 	{
 		byte c[] = new byte[2];
-		if(in.read(c, 0, 2) == 2)
-			return (int) (ByteBuffer.wrap(c).getShort() & 0xFFFF);
-		else
-			throw new Exception("UShort : buffer is empty");
+        byte read = 0;
+        while(read != 2)
+            read += in.read(c, read, 2 - read);
+		return ByteBuffer.wrap(c).getShort() & 0xFFFF;
 	}
 	
 	public int readInt() throws Exception
 	{
 		byte c[] = new byte[4];
-		if(in.read(c, 0, 4) == 4)
-			return ByteBuffer.wrap(c).getInt();
-			//return (int) (c[0] << 24 | c[1] << 16 | c[2] << 8 | c[3]);
-		else
-			throw new Exception("Int : buffer is empty");
+        byte read = 0;
+        while(read != 4)
+            read += in.read(c, read, 4 - read);
+	    return ByteBuffer.wrap(c).getInt();
 	}
 	
 	public long readLong() throws Exception
 	{
 		byte c[] = new byte[8];
-		if(in.read(c, 0, 8) == 8)
-			return ByteBuffer.wrap(c).getLong();
-			//return (long) (c[0] << 56 | c[1] << 48 | c[2] << 40 | c[3] << 32 | c[4] << 24 | c[5] << 16 | c[6] << 8 | c[7]);
-		else
-			throw new Exception("Long : buffer is empty");
+        byte read = 0;
+        while(read != 8)
+		    read += in.read(c, read, 8 - read);
+		return ByteBuffer.wrap(c).getLong();
 	}
 	
 	public float readFloat() throws Exception
 	{
 		byte c[] = new byte[4];
-		if(in.read(c, 0, 4) == 4)
-			return ByteBuffer.wrap(c).getFloat();
-		/*{
-			byte[] bytes = new byte[4];
-			for(int i = 0; i < 4; i++)
-				bytes[i] = (byte) c[i];
-			ByteBuffer buf = ByteBuffer.wrap(bytes);  
-		    return buf.getFloat();  
-		}*/
-		else
-			throw new Exception("Float : buffer is empty");
+        byte read = 0;
+        while(read != 4)
+		    read += in.read(c, read, 4 - read);
+		return ByteBuffer.wrap(c).getFloat();
 	}
 	
 	public double readDouble() throws Exception
 	{
 		byte c[] = new byte[8];
-		if(in.read(c, 0, 8) == 8)
-			return ByteBuffer.wrap(c).getDouble();
-		/*{
-			byte[] bytes = new byte[8];
-			for(int i = 0; i < 8; i++)
-				bytes[i] = (byte) c[i];
-			ByteBuffer buf = ByteBuffer.wrap(bytes);  
-		    return buf.getDouble();  
-		}*/
-		else
-			throw new Exception("Double : buffer is empty");
+        byte read = 0;
+        while(read != 8)
+		    read += in.read(c, read, 8 - read);
+		return ByteBuffer.wrap(c).getDouble();
 	}
 	
 	public String readString() throws Exception
@@ -121,18 +98,10 @@ public class TCPReader {
 		short length = (short) (this.readShort() * 2);
 		
 		byte c[] = new byte[length];
-		if(in.read(c, 0, length) == length)
-		{
-			/*String str = "";
-			
-			for(int i = 0; i < length; i++)
-				str += i % 2 == 1 ? (char)c[i] : "";
-			return new String(str);*/
-			return new String(c, "UTF-16BE");
-			
-		}
-		else
-			throw new Exception("String : buffer is empty");
+        short read = 0;
+        while(read != length)
+		    read += in.read(c, read, length - read);
+		return new String(c, "UTF-16BE");
 	}
 
     public String[] readStringArray(short len) throws Exception
@@ -144,11 +113,11 @@ public class TCPReader {
         for(short i = 0; i < len; i++)
         {
             short length = (short) (this.readShort() * 2);
+            short read = 0;
             byte c[] = new byte[length];
-            if(in.read(c, 0, length) == length)
-                stringArray[i] = new String(c, "UTF-16BE");
-            else
-                throw new Exception("String : buffer is empty");
+            while(read != length)
+                read += in.read(c, read, length - read);
+            stringArray[i] = new String(c, "UTF-16BE");
         }
         return stringArray;
     }
@@ -156,10 +125,8 @@ public class TCPReader {
 	public Boolean readBool() throws Exception
 	{
 		byte c[] = new byte[1];
-		if(in.read(c, 0, 1) == 1)
-			return c[0] == 1 ? true : false;
-		else
-			throw new Exception("Boolean : buffer is empty");
+		while(in.read(c, 0, 1) != 1) ;
+		return c[0] == 1;
 	}
 	
 	public ArrayList<McMetadata> readMetadata() throws Exception

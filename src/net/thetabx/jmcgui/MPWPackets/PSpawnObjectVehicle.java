@@ -12,10 +12,12 @@ public class PSpawnObjectVehicle extends MPWPacket{
 	private int x;
 	private int y;
 	private int z;
-	private int fireballThrowerEId;
-	private short speedX;
-	private short speedY;
-	private short speedZ;
+	private byte pitch;
+    private byte yaw;
+    private int data;
+    private short speedX;
+    private short speedY;
+    private short speedZ;
 	
 	public PSpawnObjectVehicle(TCPReader in) throws Exception {
 		super(packetId);
@@ -24,13 +26,15 @@ public class PSpawnObjectVehicle extends MPWPacket{
 		this.x = in.readInt();
 		this.y = in.readInt();
 		this.z = in.readInt();
-		this.fireballThrowerEId = in.readInt();
-		if(this.fireballThrowerEId > 0)
-		{
-			this.speedX = in.readShort();
-			this.speedY = in.readShort();
-			this.speedZ = in.readShort();
-		}
+        pitch = in.readByte();
+        yaw = in.readByte();
+        data = in.readInt();
+        if(data > 0)
+        {
+            speedX = in.readShort();
+            speedY = in.readShort();
+            speedZ = in.readShort();
+        }
 	}
 
 	public int geteId() {
@@ -64,4 +68,17 @@ public class PSpawnObjectVehicle extends MPWPacket{
 	public int getZ() {
 		return z;
 	}
+
+
+    public byte getPitch() {
+        return pitch;
+    }
+
+    public byte getYaw() {
+        return yaw;
+    }
+
+    public int getData() {
+        return data;
+    }
 }

@@ -8,18 +8,18 @@ public class PUpdateHealth extends MPWPacket{
 	private final static short packetId = 0x08;
 	
 	// Server to client
-	private short health;
+	private float health;
 	private short food;
 	private float foodSaturation;
 	
 	public PUpdateHealth(TCPReader in) throws Exception {
 		super(packetId);
-		this.health = in.readShort();
+		this.health = in.readFloat();
 		this.food = in.readShort();
 		this.foodSaturation = in.readFloat();
 	}
 
-	public short getHealth()
+	public float getHealth()
 	{
 		return this.health;
 	}

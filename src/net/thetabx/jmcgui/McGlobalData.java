@@ -19,7 +19,7 @@ public class McGlobalData {
     private String serverId;
 	private int playerEntityId;
 	private long timeTicks;
-	private short health;
+	private float health;
 	private short hunger;
 	private short level;
 	private float experience;
@@ -151,10 +151,10 @@ public class McGlobalData {
 		return (toSendChatMessages.isEmpty() ? null : toSendChatMessages.remove(0));
 	}
 	// Health
-	public void setHealth(short health) {
+	public void setHealth(float health) {
 		this.health = health;
 	}
-	public short getHealth() {
+	public float getHealth() {
 		return this.health;
 	}
 	// Hunger

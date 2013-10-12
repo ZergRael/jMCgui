@@ -1,5 +1,6 @@
 package net.thetabx.jmcgui.MPWPackets;
 
+import net.thetabx.jmcgui.McGlobalData;
 import net.thetabx.jmcgui.TCPReader;
 
 import java.util.Arrays;
@@ -24,7 +25,6 @@ public class PMapChunkBulk extends MPWPacket {
         super(packetId);
         chunkColumnCount = in.readShort();
         dataLength = in.readInt();
-        System.out.println(dataLength);
         skyLightSent = in.readBool();
         data = in.readByteArray(dataLength);
         metaInformation = new MetaInformation[chunkColumnCount];
@@ -67,5 +67,9 @@ public class PMapChunkBulk extends MPWPacket {
             this.primaryBitmap = primaryBitmap;
             this.addBitmap = addBitmap;
         }
+    }
+
+    public void gDataMod(McGlobalData gData) {
+
     }
 }
