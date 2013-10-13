@@ -3,37 +3,36 @@ package net.thetabx.jmcgui;
 import net.thetabx.jmcgui.MPWPackets.MPWPacket;
 import net.thetabx.jmcgui.MPWPackets.Packet;
 
-import java.io.*;
+import java.io.BufferedInputStream;
+import java.io.IOException;
 import java.util.LinkedList;
 import java.util.List;
 
 public class MPWReceiveThread extends Thread {
 
-	private Boolean run = false;
-	private final Object lock = new Object();
+    private Boolean run = false;
+    private final Object lock = new Object();
 
-	private List<MPWPacket> toReceive = new LinkedList<MPWPacket>();
-	
-	//private BufferedReader in;
-	private BufferedInputStream in;
-	private TCPReader reader;
-	
-	//public MPWReceiveThread(BufferedReader in)
-	public MPWReceiveThread(BufferedInputStream in)
-	{
-		this.setName("ReceiveThread");
-		if(in == null)
-			return;
-		
-		this.in = in;
-		
-		reader = new TCPReader(in);
-	}
-	
-	public void run()
-	{
-		run = true;
-		while(run) {
+    private List<MPWPacket> toReceive = new LinkedList<MPWPacket>();
+
+    //private BufferedReader in;
+    private BufferedInputStream in;
+    private TCPReader reader;
+
+    //public MPWReceiveThread(BufferedReader in)
+    public MPWReceiveThread(BufferedInputStream in) {
+        this.setName("ReceiveThread");
+        if (in == null)
+            return;
+
+        this.in = in;
+
+        reader = new TCPReader(in);
+    }
+
+    public void run() {
+        run = true;
+        while (run) {
             try {
 
                 //String packetName = Packet.getName(reader.readUByte());
@@ -51,12 +50,11 @@ public class MPWReceiveThread extends Thread {
                 Class<MPWPacket> c = Packet.fromCode(packetId);
                 System.out.println(c.getCanonicalName());
 
-                MPWPacket p = c.getConstructor(new Class[] {TCPReader.class}).newInstance(reader);
+                MPWPacket p = c.getConstructor(new Class[]{TCPReader.class}).newInstance(reader);
 
                 // Working one // But not debug explicit
                 //MPWPacket p = Packet.fromCode(reader.readUByte()).getConstructor(new Class[] {TCPReader.class}).newInstance(reader);
-                synchronized(lock)
-                {
+                synchronized (lock) {
                     toReceive.add(p);
                 }
                 p = null;
@@ -65,59 +63,50 @@ public class MPWReceiveThread extends Thread {
                 e1.printStackTrace();
             }
 
-			try {
-				Thread.sleep(McConstants.RECEIVESENDTHREADDELAY);
-			} catch (InterruptedException e) {
-				e.printStackTrace();
-			}
-		}
-	}
-	
-	public void stopNow()
-	{
-		run = false;
-		System.out.println("Stopping rThread");
-		try {
-			in.close();
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
-	}
-	
-	public Boolean isRunning()
-	{
-		return run;
-	}
-	
-	public MPWPacket getFirst()
-	{
-		if(!toReceive.isEmpty())
-		{
-			MPWPacket p;
-			synchronized(lock)
-			{
-				p = toReceive.remove(0);
-			}
-			return p;
-		}
-		return null;
-	}
-	
-	public Boolean isEmpty()
-	{
-		return toReceive.isEmpty();
-	}
-	
-	public int listSize()
-	{
-		return toReceive.size();
-	}
-	
-	public void clear()
-	{
-		synchronized(lock)
-		{
-			toReceive.clear();
-		}
-	}
+            try {
+                Thread.sleep(McConstants.RECEIVESENDTHREADDELAY);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+        }
+    }
+
+    public void stopNow() {
+        run = false;
+        System.out.println("Stopping rThread");
+        try {
+            in.close();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public Boolean isRunning() {
+        return run;
+    }
+
+    public MPWPacket getFirst() {
+        if (!toReceive.isEmpty()) {
+            MPWPacket p;
+            synchronized (lock) {
+                p = toReceive.remove(0);
+            }
+            return p;
+        }
+        return null;
+    }
+
+    public Boolean isEmpty() {
+        return toReceive.isEmpty();
+    }
+
+    public int listSize() {
+        return toReceive.size();
+    }
+
+    public void clear() {
+        synchronized (lock) {
+            toReceive.clear();
+        }
+    }
 }

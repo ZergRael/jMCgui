@@ -78,7 +78,7 @@ public class PChunkData extends MPWPacket {
         }
 
 		/*System.out.print("Extracting data for x=" + x + ", z=" + z + ". (" + primaryBitMap + ", " + addBitMap + ") Primary=" + chunksSentP + " [");
-		for(int i = 0; i < 16; i++)
+        for(int i = 0; i < 16; i++)
 			System.out.print(chunksSentArrayP[i]);
 		System.out.print("]. Add=" + chunksSentA + " [");
 		for(int i = 0; i < 16; i++)
