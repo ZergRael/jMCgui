@@ -2,35 +2,31 @@ package net.thetabx.jmcgui.MPWPackets;
 
 import net.thetabx.jmcgui.TCPReader;
 
-public class PPlayerListItem extends MPWPacket{
+public class PPlayerListItem extends MPWPacket {
+    private final static short packetId = 0xC9;
+    // Last update 74
 
-	private final static short packetId = 0xC9;
-	
-	// Server to client
-	private String playerName;
-	private Boolean online;
-	private short ping;
-	
-	public PPlayerListItem(TCPReader in) throws Exception {
-		super(packetId);
-		this.playerName = in.readString();
-		this.online = in.readBool();
-		this.ping = in.readShort();
-	}
+    // Server to client
+    private String playerName;
+    private Boolean online;
+    private short ping;
 
-	public Boolean getOnline() {
-		return online;
-	}
+    public PPlayerListItem(TCPReader in) throws Exception {
+        super(packetId);
+        playerName = in.readString();
+        online = in.readBool();
+        ping = in.readShort();
+    }
 
-	public short getPing() {
-		return ping;
-	}
+    public Boolean getOnline() {
+        return online;
+    }
 
-	public String getPlayerName() {
-		return playerName;
-	}
+    public short getPing() {
+        return ping;
+    }
 
-	public short getPacketId() {
-		return packetId;
-	}
+    public String getPlayerName() {
+        return playerName;
+    }
 }

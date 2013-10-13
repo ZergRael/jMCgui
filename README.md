@@ -3,5 +3,4 @@ jmcgui
 
 java Minecraft GUI
 
-TODO Synchronized
-TODO 0x34+
+TODO Synchronized on final arrays

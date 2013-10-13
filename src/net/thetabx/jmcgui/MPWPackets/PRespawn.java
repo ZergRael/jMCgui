@@ -1,46 +1,44 @@
 package net.thetabx.jmcgui.MPWPackets;
 
 import net.thetabx.jmcgui.TCPReader;
-import net.thetabx.jmcgui.TCPWriter;
 
-public class PRespawn extends MPWPacket{
-	private final static short packetId = 0x09;
+public class PRespawn extends MPWPacket {
+    private final static short packetId = 0x09;
     // Last update 74
-	
-	// Server to client
-	private int dimension;
-	private byte difficulty;
-	private byte creativeMode;
-	private short worldHeight;
-	private String levelType;
-	
-	public PRespawn(TCPReader in) throws Exception
-	{
-		super(packetId);
-		dimension = in.readInt();
-		difficulty = in.readByte();
-		creativeMode = in.readByte();
-		worldHeight = in.readShort();
-		levelType = in.readString();
-	}
 
-	public int getDimension() {
-		return dimension;
-	}
+    // Server to client
+    private int dimension;
+    private byte difficulty;
+    private byte creativeMode;
+    private short worldHeight;
+    private String levelType;
 
-	public byte getDifficulty() {
-		return difficulty;
-	}
+    public PRespawn(TCPReader in) throws Exception {
+        super(packetId);
+        dimension = in.readInt();
+        difficulty = in.readByte();
+        creativeMode = in.readByte();
+        worldHeight = in.readShort();
+        levelType = in.readString();
+    }
 
-	public byte getCreativeMode() {
-		return creativeMode;
-	}
+    public int getDimension() {
+        return dimension;
+    }
 
-	public short getWorldHeight() {
-		return worldHeight;
-	}
+    public byte getDifficulty() {
+        return difficulty;
+    }
 
-	public String getLevelType() {
-		return levelType;
-	}
+    public byte getCreativeMode() {
+        return creativeMode;
+    }
+
+    public short getWorldHeight() {
+        return worldHeight;
+    }
+
+    public String getLevelType() {
+        return levelType;
+    }
 }

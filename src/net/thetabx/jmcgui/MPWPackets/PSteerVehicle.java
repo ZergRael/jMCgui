@@ -18,8 +18,7 @@ public class PSteerVehicle extends MPWPacket {
     private boolean jump;
     private boolean unmount;
 
-    public PSteerVehicle(float sideways, float forward, boolean jump, boolean unmount)
-    {
+    public PSteerVehicle(float sideways, float forward, boolean jump, boolean unmount) {
         super(packetId);
         this.sideways = sideways;
         this.forward = forward;
@@ -27,8 +26,7 @@ public class PSteerVehicle extends MPWPacket {
         this.unmount = unmount;
     }
 
-    public void send(TCPWriter out) throws Exception
-    {
+    public void send(TCPWriter out) throws Exception {
         out.writeUByte(packetId);
         out.writeFloat(sideways);
         out.writeFloat(forward);

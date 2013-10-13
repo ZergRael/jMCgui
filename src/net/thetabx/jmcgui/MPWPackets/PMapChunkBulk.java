@@ -3,8 +3,6 @@ package net.thetabx.jmcgui.MPWPackets;
 import net.thetabx.jmcgui.McGlobalData;
 import net.thetabx.jmcgui.TCPReader;
 
-import java.util.Arrays;
-
 /**
  * Created with IntelliJ IDEA.
  * User: Zerg
@@ -13,6 +11,7 @@ import java.util.Arrays;
  */
 public class PMapChunkBulk extends MPWPacket {
     public static final short packetId = 0x38;
+    // Last update 74
 
     // Server to client
     private short chunkColumnCount;
@@ -28,8 +27,7 @@ public class PMapChunkBulk extends MPWPacket {
         skyLightSent = in.readBool();
         data = in.readByteArray(dataLength);
         metaInformation = new MetaInformation[chunkColumnCount];
-        for(short i = 0; i < chunkColumnCount; i++)
-        {
+        for (short i = 0; i < chunkColumnCount; i++) {
             metaInformation[i] = new MetaInformation(in.readInt(), in.readInt(), in.readUShort(), in.readUShort());
         }
     }
@@ -60,8 +58,7 @@ public class PMapChunkBulk extends MPWPacket {
         public int primaryBitmap;
         public int addBitmap;
 
-        public MetaInformation(int chunkX, int chunkZ, int primaryBitmap, int addBitmap)
-        {
+        public MetaInformation(int chunkX, int chunkZ, int primaryBitmap, int addBitmap) {
             this.chunkX = chunkX;
             this.chunkZ = chunkZ;
             this.primaryBitmap = primaryBitmap;

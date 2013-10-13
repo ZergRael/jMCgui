@@ -10,6 +10,7 @@ import net.thetabx.jmcgui.TCPReader;
  */
 public class PDisplayScoreboard extends MPWPacket {
     public static final short packetId = 0xD0;
+    // Last update 74
 
     // Server to client
     private byte position;

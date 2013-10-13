@@ -2,28 +2,32 @@ package net.thetabx.jmcgui.MPWPackets;
 
 import net.thetabx.jmcgui.TCPReader;
 
-public class PSpawnExperienceOrb extends MPWPacket {
-    private final static short packetId = 0x1A;
+/**
+ * Created with IntelliJ IDEA.
+ * User: Zerg
+ * Date: 13/10/13
+ * Time: 03:40
+ */
+public class PTileEditorOpen extends MPWPacket {
+    public static final short packetId = 0x85;
     // Last update 74
 
     // Server to client
-    private int eId;
+    private byte tileEntityId;
     private int x;
     private int y;
     private int z;
-    private short count;
 
-    public PSpawnExperienceOrb(TCPReader in) throws Exception {
+    public PTileEditorOpen(TCPReader in) throws Exception {
         super(packetId);
-        eId = in.readInt();
+        tileEntityId = in.readByte();
         x = in.readInt();
         y = in.readInt();
         z = in.readInt();
-        count = in.readShort();
     }
 
-    public int geteId() {
-        return eId;
+    public byte getTileEntityId() {
+        return tileEntityId;
     }
 
     public int getX() {
@@ -36,9 +40,5 @@ public class PSpawnExperienceOrb extends MPWPacket {
 
     public int getZ() {
         return z;
-    }
-
-    public short getCount() {
-        return count;
     }
 }

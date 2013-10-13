@@ -11,6 +11,7 @@ import net.thetabx.jmcgui.TCPWriter;
  */
 public class PTeams extends MPWPacket {
     public static final short packetId = 0xD1;
+    // Last update 74
 
     // Two way
     private String teamName;
@@ -26,26 +27,23 @@ public class PTeams extends MPWPacket {
         super(packetId);
         teamName = in.readString();
         mode = in.readByte();
-        if(mode == 1)
+        if (mode == 1)
             return;
 
-        if(mode == 0 || mode == 2)
-        {
+        if (mode == 0 || mode == 2) {
             teamDisplayName = in.readString();
             teamPrefix = in.readString();
             teamSuffix = in.readString();
             friendlyFire = in.readByte();
         }
 
-        if(mode == 0 || mode > 2)
-        {
+        if (mode == 0 || mode > 2) {
             playerCount = in.readShort();
             players = in.readStringArray(playerCount);
         }
     }
 
-    public PTeams(String teamName, byte mode, String teamDisplayName, String teamPrefix, String teamSuffix, byte friendlyFire, short playerCount, String[] players)
-    {
+    public PTeams(String teamName, byte mode, String teamDisplayName, String teamPrefix, String teamSuffix, byte friendlyFire, short playerCount, String[] players) {
         super(packetId);
         this.teamName = teamName;
         this.mode = mode;
@@ -57,8 +55,7 @@ public class PTeams extends MPWPacket {
         this.players = players;
     }
 
-    public void send(TCPWriter out) throws Exception
-    {
+    public void send(TCPWriter out) throws Exception {
         out.writeUByte(packetId);
         out.writeString(teamName);
     }

@@ -2,25 +2,25 @@ package net.thetabx.jmcgui.MPWPackets;
 
 import net.thetabx.jmcgui.TCPReader;
 
-public class PChangeGameState extends MPWPacket{
+public class PChangeGameState extends MPWPacket {
+    private final static short packetId = 0x46;
+    // Last update 74
 
-	private final static short packetId = 0x46;
-	
-	// Server to client
-	private byte reason;
-	private byte gameMode;
-	
-	public PChangeGameState(TCPReader in) throws Exception {
-		super(packetId);
-		this.reason = in.readByte();
-		this.gameMode = in.readByte();
-	}
+    // Server to client
+    private byte reason;
+    private byte gameMode;
 
-	public byte getReason() {
-		return reason;
-	}
+    public PChangeGameState(TCPReader in) throws Exception {
+        super(packetId);
+        reason = in.readByte();
+        gameMode = in.readByte();
+    }
 
-	public byte getGameMode() {
-		return gameMode;
-	}
+    public byte getReason() {
+        return reason;
+    }
+
+    public byte getGameMode() {
+        return gameMode;
+    }
 }

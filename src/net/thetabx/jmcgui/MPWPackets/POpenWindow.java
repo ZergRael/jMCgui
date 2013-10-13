@@ -2,37 +2,50 @@ package net.thetabx.jmcgui.MPWPackets;
 
 import net.thetabx.jmcgui.TCPReader;
 
-public class POpenWindow extends MPWPacket{
+public class POpenWindow extends MPWPacket {
+    private final static short packetId = 0x64;
+    // Last update 74
 
-	private final static short packetId = 0x64;
-	
-	// Server to client
-	private byte windowId;
-	private byte inventoryType;
-	private String windowTitle;
-	private byte numberOfSlots;
-	
-	public POpenWindow(TCPReader in) throws Exception {
-		super(packetId);
-		this.windowId = in.readByte();
-		this.inventoryType = in.readByte();
-		this.windowTitle = in.readString();
-		this.numberOfSlots = in.readByte();
-	}
+    // Server to client
+    private byte windowId;
+    private byte inventoryType;
+    private String windowTitle;
+    private byte numberOfSlots;
+    private boolean userProvidedWindowTitle;
+    private int entityId;
 
-	public byte getWindowId() {
-		return windowId;
-	}
+    public POpenWindow(TCPReader in) throws Exception {
+        super(packetId);
+        windowId = in.readByte();
+        inventoryType = in.readByte();
+        windowTitle = in.readString();
+        numberOfSlots = in.readByte();
+        userProvidedWindowTitle = in.readBool();
+        if (inventoryType == 11)
+            entityId = in.readInt();
+    }
 
-	public byte getInventoryType() {
-		return inventoryType;
-	}
+    public byte getWindowId() {
+        return windowId;
+    }
 
-	public String getWindowTitle() {
-		return windowTitle;
-	}
+    public byte getInventoryType() {
+        return inventoryType;
+    }
 
-	public byte getNumberOfSlots() {
-		return numberOfSlots;
-	}
+    public String getWindowTitle() {
+        return windowTitle;
+    }
+
+    public byte getNumberOfSlots() {
+        return numberOfSlots;
+    }
+
+    public boolean isUserProvidedWindowTitle() {
+        return userProvidedWindowTitle;
+    }
+
+    public int getEntityId() {
+        return entityId;
+    }
 }

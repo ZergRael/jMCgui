@@ -10,13 +10,13 @@ import net.thetabx.jmcgui.TCPReader;
  */
 public class PUpdateScore extends MPWPacket {
     public static final short packetId = 0xCF;
+    // Last update 74
 
     // Server to client
     private String itemName;
     private byte updateRemove;
     private String scoreName;
     private int value;
-
 
     public PUpdateScore(TCPReader in) throws Exception {
         super(packetId);

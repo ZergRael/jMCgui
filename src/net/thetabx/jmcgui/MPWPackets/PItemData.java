@@ -2,39 +2,37 @@ package net.thetabx.jmcgui.MPWPackets;
 
 import net.thetabx.jmcgui.TCPReader;
 
-public class PItemData extends MPWPacket{
+public class PItemData extends MPWPacket {
+    private final static short packetId = 0x83;
+    // Last update 74
 
-	private final static short packetId = 0x83;
-	
-	// Server to client
-	private short itemType;
-	private short itemId;
-	private short textLength;
-	private byte[] text;
-	
-	public PItemData(TCPReader in) throws Exception {
-		super(packetId);
-		this.itemType = in.readShort();
-		this.itemId = in.readShort();
-		this.textLength = in.readUByte();
-		this.text = new byte[textLength];
-		for(int i = 0; i < textLength; i++)
-			this.text[i] = in.readByte();
-	}
+    // Server to client
+    private short itemType;
+    private short itemId;
+    private short dataLength;
+    private byte[] data;
 
-	public short getItemType() {
-		return itemType;
-	}
+    public PItemData(TCPReader in) throws Exception {
+        super(packetId);
+        itemType = in.readShort();
+        itemId = in.readShort();
+        dataLength = in.readShort();
+        data = in.readByteArray(dataLength);
+    }
 
-	public short getItemId() {
-		return itemId;
-	}
+    public short getItemType() {
+        return itemType;
+    }
 
-	public short getTextLength() {
-		return textLength;
-	}
+    public short getItemId() {
+        return itemId;
+    }
 
-	public byte[] getText() {
-		return text;
-	}
+    public short getDataLength() {
+        return dataLength;
+    }
+
+    public byte[] getData() {
+        return data;
+    }
 }

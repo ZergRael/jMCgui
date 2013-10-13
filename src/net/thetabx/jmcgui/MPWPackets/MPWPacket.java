@@ -5,30 +5,29 @@ import net.thetabx.jmcgui.TCPWriter;
 
 abstract public class MPWPacket {
 
-	private short packetId;
-	
-	public MPWPacket(short packetId)
-	{
-		this.packetId = packetId;
-	}
-	
-	public void send(TCPWriter out) throws Exception {
-		return;
-	}
+    private short packetId;
 
-	public MPWPacket getResponsePacket(McGlobalData gData) {
-		return null;
-	}
+    public MPWPacket(short packetId) {
+        this.packetId = packetId;
+    }
 
-	public void gDataMod(McGlobalData gData) {
-		return;
-	}
+    public void send(TCPWriter out) throws Exception {
+        return;
+    }
 
-	public short getPacketId() {
-		return this.packetId;
-	}
+    public MPWPacket getResponsePacket(McGlobalData gData) {
+        return null;
+    }
+
+    public void gDataMod(McGlobalData gData) {
+        return;
+    }
+
+    public short getPacketId() {
+        return this.packetId;
+    }
 
 	/*public Object[] getFields() {
-		return null;
+        return null;
 	}*/
 }

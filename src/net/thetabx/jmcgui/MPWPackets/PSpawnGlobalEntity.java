@@ -2,43 +2,43 @@ package net.thetabx.jmcgui.MPWPackets;
 
 import net.thetabx.jmcgui.TCPReader;
 
-public class PSpawnExperienceOrb extends MPWPacket {
-    private final static short packetId = 0x1A;
+public class PSpawnGlobalEntity extends MPWPacket {
+    private final static short packetId = 0x47;
     // Last update 74
 
     // Server to client
     private int eId;
+    private byte type;
     private int x;
     private int y;
     private int z;
-    private short count;
 
-    public PSpawnExperienceOrb(TCPReader in) throws Exception {
+    public PSpawnGlobalEntity(TCPReader in) throws Exception {
         super(packetId);
         eId = in.readInt();
+        type = in.readByte();
         x = in.readInt();
         y = in.readInt();
         z = in.readInt();
-        count = in.readShort();
     }
 
     public int geteId() {
-        return eId;
+        return this.eId;
+    }
+
+    public byte getType() {
+        return type;
     }
 
     public int getX() {
-        return x;
+        return this.x;
     }
 
     public int getY() {
-        return y;
+        return this.y;
     }
 
     public int getZ() {
-        return z;
-    }
-
-    public short getCount() {
-        return count;
+        return this.z;
     }
 }

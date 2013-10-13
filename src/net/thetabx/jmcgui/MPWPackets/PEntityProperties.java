@@ -22,12 +22,12 @@ public class PEntityProperties extends MPWPacket {
         entityId = in.readInt();
         propertiesCount = in.readInt();
         propertyData = new PropertyData[propertiesCount];
-        for(int i = 0; i < propertiesCount; i++) {
+        for (int i = 0; i < propertiesCount; i++) {
             String key = in.readString();
             double value = in.readDouble();
             short listLength = in.readShort();
             ModifierData[] modifierData = new ModifierData[listLength];
-            for(short j = 0; j < listLength; j++) {
+            for (short j = 0; j < listLength; j++) {
                 modifierData[j] = new ModifierData(in.readLong(), in.readLong(), in.readDouble(), in.readByte());
             }
             propertyData[i] = new PropertyData(key, value, listLength, modifierData);
@@ -47,15 +47,13 @@ public class PEntityProperties extends MPWPacket {
         return propertyData;
     }
 
-    class PropertyData
-    {
+    class PropertyData {
         public String key;
         public double value;
         public short listLength;
         public ModifierData[] modifierData;
 
-        public PropertyData(String key, double value, short listLength, ModifierData[] modifierData)
-        {
+        public PropertyData(String key, double value, short listLength, ModifierData[] modifierData) {
             this.key = key;
             this.value = value;
             this.listLength = listLength;
@@ -63,15 +61,13 @@ public class PEntityProperties extends MPWPacket {
         }
     }
 
-    class ModifierData
-    {
+    class ModifierData {
         public long UUID1;
         public long UUID2;
         public double amount;
         public byte operation;
 
-        public ModifierData(long UUID1, long UUID2, double amount, byte operation)
-        {
+        public ModifierData(long UUID1, long UUID2, double amount, byte operation) {
             this.UUID1 = UUID1;
             this.UUID2 = UUID2;
             this.amount = amount;

@@ -1,6 +1,5 @@
 package net.thetabx.jmcgui.MPWPackets;
 
-import net.thetabx.jmcgui.McConstants;
 import net.thetabx.jmcgui.McGlobalData;
 import net.thetabx.jmcgui.TCPReader;
 import net.thetabx.jmcgui.Utils.HTTPRequest;
@@ -13,6 +12,7 @@ import net.thetabx.jmcgui.Utils.HTTPRequest;
  */
 public class PEncryptionKeyRequest extends MPWPacket {
     public static final short packetId = 0xFD;
+    // Last update 74
 
     // Server to client
     private String serverId;
@@ -21,30 +21,27 @@ public class PEncryptionKeyRequest extends MPWPacket {
     private short verifyTokenLength;
     private byte[] verifyToken;
 
-    public PEncryptionKeyRequest(TCPReader in) throws Exception
-    {
+    public PEncryptionKeyRequest(TCPReader in) throws Exception {
         super(packetId);
-
         serverId = in.readString();
-
-        // Ignore these as we can't process encryption now
         publicKeyLength = in.readShort();
         publicKey = in.readByteArray(publicKeyLength);
         verifyTokenLength = in.readShort();
         verifyToken = in.readByteArray(verifyTokenLength);
     }
 
-    public void gDataMod(McGlobalData gData)
-    {
+    public void gDataMod(McGlobalData gData) {
         gData.setServerId(serverId);
         //gData.setRunning(false);
 
-        if(gData.getServerId().equals("-")) {
+        if (gData.getServerId().equals("-")) {
             System.out.println("Offline mode");
             return;
         }
 
-        if(gData.getSessionId() == null) {
+        // TODO Check identification
+        // TODO Proper AES stream encryption
+        if (gData.getSessionId() == null) {
             gData.stop(McGlobalData.StopReason.ERROR, "Not logged in");
             return;
         }
@@ -54,14 +51,12 @@ public class PEncryptionKeyRequest extends MPWPacket {
         httpR.send(false);
         String mcResponse = httpR.read();
         System.out.println(mcResponse);
-        if(mcResponse.compareTo("OK") != 0)
-        {
+        if (mcResponse.compareTo("OK") != 0) {
             gData.stop(McGlobalData.StopReason.ERROR, mcResponse);
         }
     }
 
-    public MPWPacket getResponsePacket(McGlobalData gData)
-    {
+    public MPWPacket getResponsePacket(McGlobalData gData) {
         return new PClientStatuses((byte) 0x00);
     }
 
