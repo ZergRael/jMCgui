@@ -28,7 +28,7 @@ public enum Block {
     Wool(35, 0, 64),
     Torch(50, 0, 80);
 
-    private int id;
+    private final int id;
     private int x = 128;
     private int y = 160;
 

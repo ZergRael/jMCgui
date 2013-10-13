@@ -7,7 +7,7 @@ import java.net.UnknownHostException;
 
 public class Pinger {
 
-    public static long ping(String address) throws UnknownHostException, IOException {
+    public static long ping(String address) throws IOException {
         Runtime runtime = Runtime.getRuntime();
         Process ping = runtime.exec("ping " + address + " -n 1");
         BufferedReader result = new BufferedReader(new InputStreamReader(ping.getInputStream()));

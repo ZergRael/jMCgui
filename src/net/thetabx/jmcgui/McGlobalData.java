@@ -24,13 +24,13 @@ public class McGlobalData {
     private short hunger;
     private short level;
     private float experience;
-    private Hashtable<Integer, MPWEntity> entities = new Hashtable<Integer, MPWEntity>();
+    public final Hashtable<Integer, MPWEntity> entities = new Hashtable<Integer, MPWEntity>();
     public final ArrayList<String> receivedChatMessages = new ArrayList<String>();
     public final ArrayList<String> toSendChatMessages = new ArrayList<String>();
     private Hashtable<MapCoord, MapData> mapData = new Hashtable<MapCoord, MapData>();
 
     public enum StopReason {
-        OK, DISCONNECT, KICK, ERROR;
+        OK, DISCONNECT, KICK, ERROR
     }
 
     // Nickname

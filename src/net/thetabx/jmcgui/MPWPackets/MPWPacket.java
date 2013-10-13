@@ -11,17 +11,13 @@ abstract public class MPWPacket {
         this.packetId = packetId;
     }
 
-    public void send(TCPWriter out) throws Exception {
-        return;
-    }
+    public void send(TCPWriter out) throws Exception { }
 
     public MPWPacket getResponsePacket(McGlobalData gData) {
         return null;
     }
 
-    public void gDataMod(McGlobalData gData) {
-        return;
-    }
+    public void gDataMod(McGlobalData gData) { }
 
     public short getPacketId() {
         return this.packetId;

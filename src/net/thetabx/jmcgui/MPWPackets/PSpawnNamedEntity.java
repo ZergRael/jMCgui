@@ -72,7 +72,7 @@ public class PSpawnNamedEntity extends MPWPacket {
     }
 
     public void gDataMod(McGlobalData gData) {
-        synchronized (gData) {
+        synchronized (gData.entities) {
             gData.setEntity(this.geteId(), new EPlayer(this.geteId(), this.getX(), this.getY(), this.getZ(), playerName));
         }
     }

@@ -28,7 +28,7 @@ public class PDestroyEntity extends MPWPacket {
     }
 
     public void gDataMod(McGlobalData gData) {
-        synchronized (gData) {
+        synchronized (gData.entities) {
             for (int entityId : entitiesIds)
                 gData.removeEntity(entityId);
         }

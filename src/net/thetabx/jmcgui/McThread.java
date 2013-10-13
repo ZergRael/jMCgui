@@ -43,12 +43,9 @@ public class McThread extends Thread {
                 }
                 pResp = p.getResponsePacket(gData);
             }
-            p = null;
 
             if (pResp != null && tSend.isRunning())
                 tSend.add(pResp);
-
-            pResp = null;
 
             String messageToSend = gData.getToSendChatMessage();
             if (messageToSend != null) {

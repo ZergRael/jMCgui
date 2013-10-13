@@ -18,6 +18,7 @@ public class TCPReader {
 
     public byte readByte() throws Exception {
         byte c[] = new byte[1];
+        //noinspection StatementWithEmptyBody
         while (in.read(c, 0, 1) != 1) ;
         return c[0];
     }
@@ -32,6 +33,7 @@ public class TCPReader {
 
     public short readUByte() throws Exception {
         byte c[] = new byte[1];
+        //noinspection StatementWithEmptyBody
         while (in.read(c, 0, 1) != 1) ;
         return (short) (c[0] & 0xFF);
     }
@@ -112,6 +114,7 @@ public class TCPReader {
 
     public Boolean readBool() throws Exception {
         byte c[] = new byte[1];
+        //noinspection StatementWithEmptyBody
         while (in.read(c, 0, 1) != 1) ;
         return c[0] == 1;
     }

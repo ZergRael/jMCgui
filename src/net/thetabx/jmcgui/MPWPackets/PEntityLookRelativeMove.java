@@ -51,7 +51,7 @@ public class PEntityLookRelativeMove extends MPWPacket {
     }
 
     public void gDataMod(McGlobalData gData) {
-        synchronized (gData) {
+        synchronized (gData.entities) {
             MPWEntity e = gData.getEntity(this.geteId());
             if (e != null)
                 e.setXYZ(e.getX() + this.getdX(), e.getY() + this.getdY(), e.getZ() + this.getdZ());

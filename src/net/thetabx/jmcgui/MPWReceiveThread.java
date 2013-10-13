@@ -32,24 +32,11 @@ public class MPWReceiveThread extends Thread {
 
     public void run() {
         run = true;
+        Short lastPacketId = -1;
         while (run) {
             try {
-
-                //String packetName = Packet.getName(reader.readUByte());
-                // TODO Find a workaround for the SuppressWarnings
-                //@SuppressWarnings("unchecked")
-                //Class<MPWPacket> c = (Class<MPWPacket>) Class.forName("thetabx.jMCgui.MPWPackets.P" + packetName);
-                //MPWPacket p = (MPWPacket)c.getConstructor(new Class[] {Class.forName("thetabx.jMCgui.TCPReader")}).newInstance(reader);
-
-                //Class<MPWPacket> c = Packet.fromCode(reader.readUByte());
-                //MPWPacket p = (MPWPacket)c.getConstructor(new Class[] {TCPReader.class}).newInstance(reader);
-
-
-                short packetId = reader.readUByte();
-                System.out.print(String.format("%02X - ", packetId));
-                Class<MPWPacket> c = Packet.fromCode(packetId);
-                System.out.println(c.getCanonicalName());
-
+                lastPacketId = reader.readUByte();
+                Class<MPWPacket> c = Packet.fromCode(lastPacketId);
                 MPWPacket p = c.getConstructor(new Class[]{TCPReader.class}).newInstance(reader);
 
                 // Working one // But not debug explicit
@@ -57,9 +44,9 @@ public class MPWReceiveThread extends Thread {
                 synchronized (lock) {
                     toReceive.add(p);
                 }
-                p = null;
             } catch (Exception e1) {
                 this.stopNow();
+                System.out.print(String.format("Failed on %02X", lastPacketId));
                 e1.printStackTrace();
             }
 

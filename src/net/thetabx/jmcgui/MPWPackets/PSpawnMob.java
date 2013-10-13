@@ -90,7 +90,7 @@ public class PSpawnMob extends MPWPacket {
     }
 
     public void gDataMod(McGlobalData gData) {
-        synchronized (gData) {
+        synchronized (gData.entities) {
             gData.setEntity(this.geteId(), new EMob(this.geteId(), this.getX(), this.getY(), this.getZ(), type));
         }
     }

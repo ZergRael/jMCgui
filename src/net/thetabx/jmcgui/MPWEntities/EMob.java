@@ -37,7 +37,7 @@ public class EMob extends MPWEntity {
         Blaze(61), MagmaCube(62), EnderDragon(63), Pig(90), Sheep(91), Cow(92), Chicken(93), Squid(94), Wolf(95), Mooshroom(96), Snowman(97), Ocelot(98),
         IronGolem(99), Villager(120);
 
-        private int mobType;
+        private final int mobType;
 
         private MobType(int mobType) {
             this.mobType = mobType;
@@ -48,10 +48,10 @@ public class EMob extends MPWEntity {
         }
 
         public static String getName(int mobType) {
-            MobType[] m = MobType.values();
-            for (int i = 0; i < m.length; i++) {
-                if (m[i].getMobType() == mobType)
-                    return m[i].name();
+            MobType[] mobTypes = MobType.values();
+            for (MobType mob : mobTypes) {
+                if (mob.getMobType() == mobType)
+                    return mob.name();
             }
 
             System.out.println("WARNING UNKNOWN MOBTYPE " + mobType);

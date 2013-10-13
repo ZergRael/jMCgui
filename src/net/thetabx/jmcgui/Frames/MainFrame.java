@@ -350,7 +350,7 @@ public class MainFrame extends JFrame {
 
         pLeft.add(sliderZoom, BorderLayout.SOUTH);
 
-        this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        this.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
         this.setVisible(true);
 
         //pMinimap.setPreferredSize(new Dimension(pCenter.getHeight() - 12, pCenter.getHeight() - 12));
@@ -437,7 +437,7 @@ public class MainFrame extends JFrame {
 
                 // Time
                 int timeDay = (int) ((gData.getTimeTicks() + 6000) % 24000);
-                int timeMin = (int) ((timeDay % 1000) / 20);
+                int timeMin = (timeDay % 1000) / 20;
                 lblTime.setText(timeDay / 1000 + "h" + (timeMin < 10 ? "0" + timeMin : timeMin));
 
                 // Ping
@@ -451,15 +451,15 @@ public class MainFrame extends JFrame {
 
 
                 // Minimap update
-                ESelf self = null;
-                synchronized (gData) {
+                ESelf self;
+                synchronized (gData.entities) {
                     self = ((ESelf) gData.getEntity(gData.getPlayerEntityId()));
                 }
 
                 Enumeration<Integer> entitiesKeysEnum = gData.getEntitiesKeys();
                 while (entitiesKeysEnum.hasMoreElements()) {
-                    MPWEntity e = null;
-                    synchronized (gData) {
+                    MPWEntity e;
+                    synchronized (gData.entities) {
                         e = gData.getEntity(entitiesKeysEnum.nextElement());
                     }
 

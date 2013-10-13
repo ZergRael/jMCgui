@@ -39,7 +39,7 @@ public class PEntityRelativeMove extends MPWPacket {
     }
 
     public void gDataMod(McGlobalData gData) {
-        synchronized (gData) {
+        synchronized (gData.entities) {
             MPWEntity e = gData.getEntity(this.geteId());
             if (e != null)
                 e.setXYZ(e.getX() + getdX(), e.getY() + getdY(), e.getZ() + getdZ());

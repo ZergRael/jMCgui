@@ -45,7 +45,6 @@ public class MPWSendThread extends Thread {
                 } catch (Exception e) {
                     e.printStackTrace();
                 }
-                p = null;
             }
 
 

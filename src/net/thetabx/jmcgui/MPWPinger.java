@@ -38,9 +38,7 @@ public class MPWPinger {
 
             this.address = address;
             this.port = port;
-        } catch (Exception e) {
-            return;
-        }
+        } catch (Exception ignored) { }
     }
 
     public boolean ping() {

@@ -52,7 +52,7 @@ public class PPlayerPositionLook extends MPWPacket {
     }
 
     public void gDataMod(McGlobalData gData) {
-        synchronized (gData) {
+        synchronized (gData.entities) {
             if (gData.getEntity(gData.getPlayerEntityId()) == null)
                 gData.setEntity(gData.getPlayerEntityId(), new ESelf(gData.getPlayerEntityId(), x, y, z, gData.getNickname(), stance, yaw, pitch, onGround));
             else {

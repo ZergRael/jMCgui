@@ -44,8 +44,6 @@ public class MinecraftProtocolWrapper {
         }
 
         tManager = new McThread(in, out, globalData);
-        if (tManager == null)
-            return false;
 
         tManager.addCustEventListener(new CustEventListener() { //Fired when tManager has done closing work
             public void custEventOccurred(CustEvent evt) {

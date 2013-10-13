@@ -13,8 +13,8 @@ import java.util.ArrayList;
 public class MinimapPanel extends JPanel {
 
     private static final long serialVersionUID = 1L;
-    private ArrayList<MinimapDot> dots = new ArrayList<MinimapDot>();
-    private ArrayList<MinimapBlock> blocks = new ArrayList<MinimapBlock>();
+    private final ArrayList<MinimapDot> dots = new ArrayList<MinimapDot>();
+    private final ArrayList<MinimapBlock> blocks = new ArrayList<MinimapBlock>();
     private BufferedImage terrain; //"res/terrain.png"
 
     private int zoom = McConstants.DEFAULTFPS;
@@ -45,7 +45,7 @@ public class MinimapPanel extends JPanel {
 
         // Blocks
         while (!blocks.isEmpty()) {
-            MinimapBlock block = null;
+            MinimapBlock block;
             synchronized (blocks) {
                 block = blocks.remove(0);
             }
@@ -68,7 +68,7 @@ public class MinimapPanel extends JPanel {
 
         // Dots
         while (!dots.isEmpty()) {
-            MinimapDot dot = null;
+            MinimapDot dot;
             synchronized (dots) {
                 dot = dots.remove(0);
             }
@@ -93,7 +93,7 @@ public class MinimapPanel extends JPanel {
 
     public void setBlock(double x, double z, byte data) {
         //System.out.println("Block set at x=" + x + ", z=" + z + ". Id= " + data);
-        synchronized (dots) {
+        synchronized (blocks) {
             blocks.add(new MinimapBlock(x, z, data));
         }
     }

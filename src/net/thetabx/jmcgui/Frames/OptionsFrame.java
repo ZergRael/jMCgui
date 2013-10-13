@@ -75,10 +75,7 @@ public class OptionsFrame extends JFrame {
     }
 
     public boolean isFPSValid(String str) {
-        if (str.matches("\\d{1,3}") && !str.matches("0*"))
-            return true;
-
-        return false;
+        return str.matches("\\d{1,3}") && !str.matches("0*");
     }
 
     public void setSaveButton(boolean set) {

@@ -32,7 +32,8 @@ public class PMultiBlockChange extends MPWPacket {
     }
 
     public void gDataMod(McGlobalData gData) {
-        byte[][][] map = gData.getMapData(new MapCoord(chunkX, chunkZ)).getData();
+        // TODO Affect mapData
+        /*byte[][][] map = gData.getMapData(new MapCoord(chunkX, chunkZ)).getData();
 
         for (int i = 0; i < recordCount; i++) {
             //byte metaData = (byte) (data[i] & 0xF);
@@ -42,6 +43,6 @@ public class PMultiBlockChange extends MPWPacket {
             byte x = (byte) ((data[i] >> 7) & 0xF);
 
             map[x][z][y] = blockId;
-        }
+        }  */
     }
 }

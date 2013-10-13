@@ -85,8 +85,8 @@ public enum Packet {
     ServerListPing(0xFE, PServerListPing.class),
     DisconnectKick(0xFF, PDisconnectKick.class);
 
-    private int hexCode;
-    private Class<MPWPacket> c;
+    private final int hexCode;
+    private final Class<MPWPacket> c;
 
     @SuppressWarnings({"unchecked", "rawtypes"})
     private Packet(int hexCode, Class c) {

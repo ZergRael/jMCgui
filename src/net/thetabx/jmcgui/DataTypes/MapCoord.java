@@ -54,10 +54,6 @@ public class MapCoord {
         if (getClass() != obj.getClass())
             return false;
         MapCoord other = (MapCoord) obj;
-        if (x != other.x)
-            return false;
-        if (z != other.z)
-            return false;
-        return true;
+        return x == other.x && z == other.z;
     }
 }
